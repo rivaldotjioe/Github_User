@@ -46,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        user = intent.extras?.getParcelable(USER_KEY, User::class.java) as User
+        user = intent.getParcelableExtra<User>(USER_KEY) as User
         observeIsFavorite()
         observeIsLoading()
         checkIsFavorite()

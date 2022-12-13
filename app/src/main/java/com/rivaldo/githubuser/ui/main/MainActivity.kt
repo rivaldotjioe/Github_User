@@ -90,6 +90,13 @@ class MainActivity : AppCompatActivity() {
         val searchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = "Search by Username"
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                viewModel.searchUser("")
+                return false
+            }
+
+        })
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
@@ -99,9 +106,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null || viewModel.viewModelScope.isActive) {
-                    viewModel.searchUser(newText.toString())
-                }
+//                if (newText != null || viewModel.viewModelScope.isActive) {
+//                    viewModel.searchUser(newText.toString())
+//                }
                 return true
             }
         })
